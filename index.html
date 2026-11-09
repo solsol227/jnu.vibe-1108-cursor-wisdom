@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>오늘의 명언</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- 화면이 그려지기 전에 저장된 테마를 적용해 깜빡임을 줄인다 -->
+  <script>
+    (function () {
+      var savedTheme = localStorage.getItem("quote-theme");
+      if (savedTheme === "dark" || savedTheme === "light") {
+        document.documentElement.setAttribute("data-theme", savedTheme);
+      }
+    })();
+  </script>
+</head>
+<body>
+  <div class="theme-bar">
+    <div class="theme-switch" role="group" aria-label="테마 선택">
+      <button type="button" class="theme-btn" id="theme-light-btn">라이트</button>
+      <button type="button" class="theme-btn" id="theme-dark-btn">다크</button>
+    </div>
+  </div>
+
+  <main class="page">
+    <section class="card">
+      <!-- 명언이 바뀔 때 이 영역만 페이드된다 -->
+      <div class="quote-body" id="quote-card" aria-live="polite">
+        <p class="label">오늘의 한 줄</p>
+        <blockquote class="quote" id="quote-text"></blockquote>
+        <p class="author" id="quote-author"></p>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="generate-btn" id="generate-btn">새 명언 생성</button>
+        <button type="button" class="share-btn" id="share-btn">공유하기</button>
+      </div>
+
+      <form class="add-form" id="add-form">
+        <h2>내 명언 추가</h2>
+        <label>
+          명언
+          <textarea id="new-text" name="text" rows="3" required placeholder="마음에 남긴 문장을 적어 보세요"></textarea>
+        </label>
+        <label>
+          저자
+          <input id="new-author" name="author" type="text" placeholder="비워 두면 익명으로 저장됩니다">
+        </label>
+        <button type="submit" class="save-btn">저장하기</button>
+        <p class="status" id="status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

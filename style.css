@@ -1,0 +1,251 @@
+/* 라이트/다크에서 함께 쓰는 색. html의 data-theme 값으로 바뀐다 */
+:root {
+  --page-bg: linear-gradient(160deg, #fde8ef 0%, #e8f0ff 48%, #e7f8f2 100%);
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --text: #3d4450;
+  --muted: #6d7689;
+  --label: #8b93a7;
+  --line: #e6eaf3;
+  --input-bg: #ffffff;
+  --input-border: #e1e6f2;
+  --shadow: 0 18px 40px rgba(120, 130, 160, 0.18);
+  --accent: #7d8cff;
+  --accent-hover: #6a79f0;
+  --on-accent: #ffffff;
+  --status: #5c6578;
+}
+
+html[data-theme="dark"] {
+  --page-bg: linear-gradient(160deg, #24182c 0%, #1a2236 52%, #14282a 100%);
+  --card-bg: rgba(30, 34, 48, 0.94);
+  --text: #eef1f8;
+  --muted: #b7c0d4;
+  --label: #9aa6c0;
+  --line: #343b52;
+  --input-bg: #262b3d;
+  --input-border: #3c445c;
+  --shadow: 0 18px 40px rgba(0, 0, 0, 0.38);
+  --accent: #8b9bff;
+  --accent-hover: #a3afff;
+  --status: #c9d1e4;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  color: var(--text);
+  background: var(--page-bg);
+}
+
+.theme-bar {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+}
+
+.theme-switch {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
+}
+
+.theme-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 8px 14px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.theme-btn.is-active {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.theme-btn:focus-visible,
+.generate-btn:focus-visible,
+.share-btn:focus-visible,
+.save-btn:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #c9d0ff;
+  outline-offset: 2px;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 84px 16px 40px;
+}
+
+.card {
+  width: min(560px, 100%);
+  padding: 40px 36px 28px;
+  text-align: center;
+  background: var(--card-bg);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+}
+
+/* 명언이 바뀔 때 이 부분만 잠깐 사라졌다가 다시 나타난다 */
+.quote-body {
+  transition: opacity 0.35s ease;
+}
+
+.quote-body.is-fading {
+  opacity: 0;
+}
+
+.label {
+  margin-bottom: 18px;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  color: var(--label);
+}
+
+.quote {
+  font-size: 1.45rem;
+  line-height: 1.7;
+  font-weight: 600;
+  word-break: keep-all;
+}
+
+.author {
+  margin-top: 22px;
+  font-size: 1rem;
+  color: var(--muted);
+}
+
+.author::before {
+  content: "— ";
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.generate-btn,
+.share-btn,
+.save-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 14px 24px;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.generate-btn,
+.save-btn {
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: 0 8px 18px rgba(125, 140, 255, 0.28);
+}
+
+.generate-btn:hover,
+.save-btn:hover {
+  background: var(--accent-hover);
+}
+
+.share-btn {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--input-border);
+}
+
+.share-btn:hover {
+  border-color: var(--accent);
+}
+
+.add-form {
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+  text-align: left;
+}
+
+.add-form h2 {
+  margin-bottom: 14px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.add-form label {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.add-form input,
+.add-form textarea {
+  width: 100%;
+  margin-top: 6px;
+  padding: 12px 14px;
+  border: 1px solid var(--input-border);
+  border-radius: 14px;
+  background: var(--input-bg);
+  color: var(--text);
+  font: inherit;
+  font-weight: 500;
+}
+
+.add-form textarea {
+  min-height: 88px;
+  resize: vertical;
+}
+
+.save-btn {
+  width: 100%;
+  margin-top: 4px;
+}
+
+.status {
+  min-height: 1.4em;
+  margin-top: 12px;
+  text-align: center;
+  color: var(--status);
+  font-size: 0.92rem;
+}
+
+@media (min-height: 860px) {
+  .page {
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 28px 20px 22px;
+    border-radius: 22px;
+  }
+
+  .quote {
+    font-size: 1.2rem;
+  }
+
+  .theme-btn {
+    padding: 8px 12px;
+  }
+}
